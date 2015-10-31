@@ -37,11 +37,11 @@ public class MainActivity extends AppCompatActivity {
                 public void run() {
                     // This method will be executed once the timer is over
                     // Start your app main activity
-                    Intent i = new Intent(MainActivity.this, SelectOptions.class);
-                    startActivity(i);
-
+                    //Intent i = new Intent(MainActivity.this, SelectOptions.class);
+                    //startActivity(i);
+                    setContentView(R.layout.fragment_select_options);
                     // close this activity
-                    finish();
+                   // finish();
                 }
             }, SPLASH_TIME_OUT);
         }
