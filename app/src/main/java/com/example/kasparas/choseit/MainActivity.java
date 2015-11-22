@@ -10,11 +10,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.SeekBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements SelectOptions.OnFragmentInteractionListener,
                                                             SelectRestaurant.OnFragmentInteractionListener {
 
     private static int SPLASH_TIME_OUT = 3000;
+    private static SeekBar seek_bar;
+    private static TextView text_view;
 
     @Override
     public void onFragmentInteraction(Uri uri) {
@@ -34,6 +39,8 @@ public class MainActivity extends AppCompatActivity implements SelectOptions.OnF
                 }
             }, SPLASH_TIME_OUT);
         }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

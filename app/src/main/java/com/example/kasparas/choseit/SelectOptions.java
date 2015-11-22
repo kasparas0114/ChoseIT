@@ -20,9 +20,18 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.SeekBar;
+import android.widget.Toast;
+import android.graphics.Color;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
+
+import java.sql.Array;
+
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
@@ -32,10 +41,17 @@ import android.widget.TextView;
  * create an instance of this fragment.
  */
 public class SelectOptions extends Fragment {
+
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    private static SeekBar seek_bar;
+    private static TextView text_view;
+    Spinner spinnerFrom;
+    ArrayAdapter<CharSequence> adapter;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -66,10 +82,51 @@ public class SelectOptions extends Fragment {
         // Required empty public constructor
     }
 
+    public void spinners (View view)
+    {
+        double previous_price_from = 3.50;
+        double previous_price_to = 5.0;
+        Spinner spinnerFrom = (Spinner) view.findViewById(R.id.spinner);
+        Spinner spinnerTo = (Spinner) view.findViewById(R.id.spinner2);
+    }
+
+    public void seekbar(View view)
+    {
+        int previous_progress = 7;
+        seek_bar = (SeekBar) view.findViewById(R.id.seekBar);
+        seek_bar.setMax (30);
+        seek_bar.setDrawingCacheBackgroundColor(Color.CYAN);
+        seek_bar.setProgress(previous_progress);
+        text_view = (TextView) view.findViewById(R.id.textView3);
+        text_view.setText("Covered : " + seek_bar.getProgress() + "/" + seek_bar.getMax());
+        final int progress_value;
+        seek_bar.setOnSeekBarChangeListener(
+                new SeekBar.OnSeekBarChangeListener() {
+                    int progress_value;
+
+                    @Override
+
+                    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                        progress_value = progress;
+                        text_view.setText("Covered : " + progress + "/" + seek_bar.getMax());
+
+                    }
+
+                    @Override
+                    public void onStartTrackingTouch(SeekBar seekBar) {
+                    }
+
+                    @Override
+                    public void onStopTrackingTouch(SeekBar seekBar) {
+
+                        text_view.setText("CoveredB : " + progress_value + "/" + seek_bar.getMax());
+                    }
+                }
+        );
+    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
 
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
@@ -81,7 +138,9 @@ public class SelectOptions extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_select_options, container, false);
-        return inflater.inflate(R.layout.fragment_select_options, container, false);
+        seekbar (view);
+        return view;
+
     }
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
