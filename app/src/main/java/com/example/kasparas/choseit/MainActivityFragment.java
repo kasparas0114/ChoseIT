@@ -1,10 +1,12 @@
 package com.example.kasparas.choseit;
 
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.support.v7.app.ActionBar;
 
 /**
  * A placeholder fragment containing a simple view.

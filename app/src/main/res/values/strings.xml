@@ -7,4 +7,16 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="ChooseIT">ChooseIT</string>
     <string name="SelectOptions">Pasirinkite Sąlygas</string>
+    <string name="Continue">Tęsti</string>
+
+    <!--     <string-array name="planets_array">
+             <item>Mercury</item>
+             <item>Venus</item>
+             <item>Earth</item>
+             <item>Mars</item>
+             <item>Jupiter</item>
+             <item>Saturn</item>
+             <item>Uranus</item>
+             <item>Neptune</item>
+         </string-array> -->S
 </resources>

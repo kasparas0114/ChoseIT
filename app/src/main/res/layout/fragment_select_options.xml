@@ -1,6 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" tools:context="com.example.kasparas.choseit.SelectOptions">
+     android:layout_height="match_parent" android:id = "@+id/selectOptionsId" tools:context="com.example.kasparas.choseit.SelectOptions">
 
     <TextView
         android:layout_width="wrap_content"
@@ -11,4 +11,36 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="41dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Continue"
+        android:id="@+id/button"
+        android:layout_marginBottom="42dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:nestedScrollingEnabled="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text"
+        android:id="@+id/textView3"
+        android:layout_above="@+id/button"
+        android:layout_alignLeft="@+id/button"
+        android:layout_alignStart="@+id/button"
+        android:layout_marginBottom="67dp" />
+
+    <!-- <Spinner
+         android:id="@+id/planets_spinner"
+         android:layout_width="fill_parent"
+         android:layout_height="wrap_content"
+         android:layout_alignWithParentIfMissing="false"
+         android:layout_marginTop="46dp"
+         android:layout_below="@+id/textView2"
+         android:layout_alignParentLeft="true"
+         android:layout_alignParentStart="true"
+         android:entries="@array/dista_array" /> -->
 </RelativeLayout>
