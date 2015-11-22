@@ -16,11 +16,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/Continue"
-        android:id="@+id/button"
+        android:id="@+id/btn_select_options_next"
         android:layout_marginBottom="42dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:nestedScrollingEnabled="true" />
+        android:nestedScrollingEnabled="false"
+        android:onClick="button_select_options_next_click" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -28,9 +29,9 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Large Text"
         android:id="@+id/textView3"
-        android:layout_above="@+id/button"
-        android:layout_alignLeft="@+id/button"
-        android:layout_alignStart="@+id/button"
+        android:layout_above="@+id/btn_select_options_next"
+        android:layout_alignLeft="@+id/btn_select_options_next"
+        android:layout_alignStart="@+id/btn_select_options_next"
         android:layout_marginBottom="67dp" />
 
     <!-- <Spinner

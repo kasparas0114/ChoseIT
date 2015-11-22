@@ -5,6 +5,7 @@ import android.app.FragmentTransaction;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+//import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,6 +43,7 @@ public class SelectOptions extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
+
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -78,37 +80,7 @@ public class SelectOptions extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_select_options, container, false);
-        Button button = (Button) view.findViewById(R.id.button);
-        button.setOnClickListener (new View.OnClickListener() {
-
-            @Override
-            public void onClick (View v) {
-                TextView text = (TextView) v.findViewById(R.id.textView3);
-                text.setText("Nestaliuok, Nuu");
-                /*FragmentManager fm = getFragmentManager();
-                android.support.v4.app.FragmentTransaction ft = fm.beginTransaction();
-                ft.replace(R.id.selectOptionsId, new SelectResaurant()).commit();*/
-
-                //SelectResaurant nextFrag = new SelectResaurant();
-               // getFragmentManager().beginTransaction().replace(R.id.myId,nextFrag).addToBackStack(null).commit();
-
-//                        FragmentManager fm = getFragmentManager();
-//                        android.support.v4.app.FragmentTransaction ft = fm.beginTransaction();
-//                        ft.replace(R.id.myId, new SelectResaurant());
-//                        ft.commit();
-                   //     break;
-                       /* FragmentTransaction ft = getActivity().getFragmentManager().beginTransaction();
-                        SelectResaurant bdf = new SelectResaurant();
-                        ft.replace(R.layout.fragment_select_resaurant, bdf);
-                        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-                        ft.addToBackStack(null);
-                        ft.commit();
-                        break;*/
-
-        }
-        });
         return inflater.inflate(R.layout.fragment_select_options, container, false);
     }
     // TODO: Rename method, update argument and hook method into UI event

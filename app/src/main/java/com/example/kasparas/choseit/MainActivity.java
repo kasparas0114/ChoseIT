@@ -1,47 +1,36 @@
 package com.example.kasparas.choseit;
 
-import android.content.Intent;
+import android.net.Uri;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SelectOptions.OnFragmentInteractionListener,
+                                                            SelectRestaurant.OnFragmentInteractionListener {
 
-  //  @Override
-   /* protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);*/
+    private static int SPLASH_TIME_OUT = 3000;
 
-        // Splash screen timer
-        private static int SPLASH_TIME_OUT = 3000;
+    @Override
+    public void onFragmentInteraction(Uri uri) {
 
-        @Override
+    }
+
+    @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            setContentView(R.layout.content_main);
+            setContentView(R.layout.splash_screen);
 
             new Handler().postDelayed(new Runnable() {
-
-            /*
-             * Showing splash screen with a timer. This will be useful when you
-             * want to show case your app logo / company
-             */
-
                 @Override
                 public void run() {
-                    // This method will be executed once the timer is over
-                    // Start your app main activity
-                    //Intent i = new Intent(MainActivity.this, SelectOptions.class);
-                    //startActivity(i);
-                    setContentView(R.layout.fragment_select_options);
-                    // close this activity
-                   // finish();
+                    setContentView(R.layout.activity_main);
+                    changeFragment(R.id.main, new SelectOptions());
                 }
             }, SPLASH_TIME_OUT);
         }
@@ -66,5 +55,18 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void button_select_options_next_click (View view) {
+        changeFragment(R.id.main, new SelectRestaurant());
+    }
+
+    public void changeFragment (int containerId, Fragment fragment) {
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+
+        ft.replace(containerId, fragment);
+        ft.addToBackStack(null);
+        ft.commit();
     }
 }
