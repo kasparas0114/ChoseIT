@@ -102,15 +102,10 @@ public class MainActivity extends AppCompatActivity implements SelectOptions.OnF
     * */
     /******************************************************************************************/
     public void button_select_options_next_click (View view) {
-        changeFragment(R.id.main, new RestaurantList();
-        showRestaurantList((getRestaurantList()));
+        changeFragment(R.id.main, new RestaurantList());
     }
 
     /******************************************************************************************/
-
-    public String[] getRestaurantList () {
-        return new String[] {"Kinieciai", "Ciliakas", "Montuotojas"};
-    }
 
     public void changeFragment (int containerId, Fragment fragment) {
         FragmentManager fm = getSupportFragmentManager();

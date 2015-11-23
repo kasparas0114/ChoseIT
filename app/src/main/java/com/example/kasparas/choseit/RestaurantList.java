@@ -72,9 +72,19 @@ public class RestaurantList extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-   //     showRestaurantList(getRestaurantList();
+        View view = inflater.inflate(R.layout.fragment_select_resaurant, container, false);
+        showRestaurantList(view, getRestaurantList());
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_select_resaurant, container, false);
+        return view;
+    }
+
+    public String[] getRestaurantList () {
+        return new String[] {"Kinieciai", "Ciliakas", "Montuotojas", "Ciliakas", "Montuotojas"
+                , "Ciliakas", "Montuotojas", "Ciliakas", "Montuotojas", "Ciliakas", "Montuotojas"
+                , "Ciliakas", "Montuotojas", "Ciliakas", "Montuotojas", "Ciliakas", "Montuotojas"
+                , "Ciliakas", "Montuotojas", "Ciliakas", "Montuotojas", "Ciliakas", "Montuotojas"
+                , "Ciliakas", "Montuotojas", "Ciliakas", "Montuotojas", "Ciliakas", "Montuotojas"
+                , "Ciliakas", "Montuotojas", "Ciliakas", "Montuotojas", "Ciliakas", "Montuotojas"};
     }
 
     public void showRestaurantList (View view, String[] restaurantList) {
@@ -85,16 +95,16 @@ public class RestaurantList extends Fragment {
             list.add(restaurantList[i]);
         }
         final OSArrayAdapter adapter = new OSArrayAdapter(this.getActivity(),
-                R.layout.restaurant_list_item, list);
+                R.layout.restaurant_list_item, R.id.tv_restaurantListItem_title, list);
         listView.setAdapter(adapter);
 
     }
 
     public class OSArrayAdapter extends ArrayAdapter<String> {
         HashMap<String, Integer> mIdMap = new HashMap<String, Integer>();
-        public OSArrayAdapter(Context context, int textViewResourceId,
+        public OSArrayAdapter(Context context, int rowId, int textViewResourceId,
                               List<String> objects) {
-            super(context, textViewResourceId, objects);
+            super(context, rowId, textViewResourceId, objects);
             for (int i = 0; i < objects.size(); ++i) {
                 mIdMap.put(objects.get(i), i);
             }
