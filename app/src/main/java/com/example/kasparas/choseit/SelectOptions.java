@@ -13,6 +13,8 @@ import android.widget.TextView;
 import android.widget.SeekBar;
 import android.graphics.Color;
 import android.widget.Spinner;
+import java.util.List;
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -64,23 +66,35 @@ public class SelectOptions extends Fragment {
         // Required empty public constructor
     }
 
-    public void spinners (View view)
+    public void initPriceSpinners (View view)
     {
-        double previous_price_from = 3.50;
-        double previous_price_to = 5.0;
+        Double[] spinnerArr = new Double[20];
+        int iter = 0;
+        for (double x = 0;x<=10;x+=0.5)
+        {
+            if (iter>=20) break;
+            spinnerArr[iter] = x;
+            iter++;
+
+        }
+
+        ArrayAdapter<Double> spinnerAdapter = new ArrayAdapter<Double>(this.getActivity(),android.R.layout.simple_spinner_item,spinnerArr);
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         Spinner spinnerFrom = (Spinner) view.findViewById(R.id.sp_pr_from);
         Spinner spinnerTo = (Spinner) view.findViewById(R.id.sp_pr_to);
+        spinnerFrom.setAdapter(spinnerAdapter);
+        spinnerTo.setAdapter(spinnerAdapter);
     }
 
-    public void seekbar(View view)
+    public void initSeekbar(View view)
     {
         int previous_progress = 7;
         seek_bar = (SeekBar) view.findViewById(R.id.sb_dist);
         seek_bar.setMax (30);
         seek_bar.setDrawingCacheBackgroundColor(Color.CYAN);
         seek_bar.setProgress(previous_progress);
-        text_view = (TextView) view.findViewById(R.id.textView3);
-        text_view.setText("Covered : " + seek_bar.getProgress() + "/" + seek_bar.getMax());
+        text_view = (TextView) view.findViewById(R.id.tv_prog);
+        text_view.setText("Pasirinkta : " + seek_bar.getProgress() + " kilometrų");
         final int progress_value;
         seek_bar.setOnSeekBarChangeListener(
                 new SeekBar.OnSeekBarChangeListener() {
@@ -90,8 +104,7 @@ public class SelectOptions extends Fragment {
 
                     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                         progress_value = progress;
-                        text_view.setText("Covered : " + progress + "/" + seek_bar.getMax());
-
+                        text_view.setText("Pasirinkta : " + progress + " kilometrų");
                     }
 
                     @Override
@@ -101,7 +114,7 @@ public class SelectOptions extends Fragment {
                     @Override
                     public void onStopTrackingTouch(SeekBar seekBar) {
 
-                        text_view.setText("CoveredB : " + progress_value + "/" + seek_bar.getMax());
+                        text_view.setText("Pasirinkta : " + progress_value + " kilometrų");
                     }
                 }
         );
@@ -120,15 +133,10 @@ public class SelectOptions extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_select_options, container, false);
-        seekbar (view);
+        initSeekbar(view);
+        initPriceSpinners(view);
         return view;
 
-    }
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
     }
 
     @Override
