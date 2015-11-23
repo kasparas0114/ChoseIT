@@ -1,36 +1,18 @@
 package com.example.kasparas.choseit;
 
 import android.app.Activity;
-import android.app.FragmentTransaction;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 //import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.content.Intent;
-import android.os.Bundle;
-import android.os.Handler;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.SeekBar;
-import android.widget.Toast;
 import android.graphics.Color;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
-
-import java.sql.Array;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -86,14 +68,14 @@ public class SelectOptions extends Fragment {
     {
         double previous_price_from = 3.50;
         double previous_price_to = 5.0;
-        Spinner spinnerFrom = (Spinner) view.findViewById(R.id.spinner);
-        Spinner spinnerTo = (Spinner) view.findViewById(R.id.spinner2);
+        Spinner spinnerFrom = (Spinner) view.findViewById(R.id.sp_pr_from);
+        Spinner spinnerTo = (Spinner) view.findViewById(R.id.sp_pr_to);
     }
 
     public void seekbar(View view)
     {
         int previous_progress = 7;
-        seek_bar = (SeekBar) view.findViewById(R.id.seekBar);
+        seek_bar = (SeekBar) view.findViewById(R.id.sb_dist);
         seek_bar.setMax (30);
         seek_bar.setDrawingCacheBackgroundColor(Color.CYAN);
         seek_bar.setProgress(previous_progress);

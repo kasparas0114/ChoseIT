@@ -1,16 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="fill_parent"
-     android:layout_height="match_parent" android:id = "@+id/selectOptionsId" tools:context="com.example.kasparas.choseit.SelectOptions">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/SelectOptions"
-        android:id="@+id/textView2"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="41dp" />
+     android:layout_height="match_parent"
+    tools:context="com.example.kasparas.choseit.SelectOptions">
 
     <Button
         android:layout_width="wrap_content"
@@ -21,65 +12,105 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:nestedScrollingEnabled="false"
-        android:onClick="button_select_options_next_click" />
+        android:onClick="button_select_options_next_click"
+        android:layout_gravity="bottom" />
+
+    <Spinner
+        android:layout_width="131dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/sp_pr_from"
+        android:layout_gravity="center_vertical"
+        android:layout_alignTop="@+id/sp_pr_to"
+        android:layout_toLeftOf="@+id/btn_select_options_next"
+        android:layout_toStartOf="@+id/btn_select_options_next" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/select_price_interv"
+        android:id="@+id/select_price"
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/sp_pr_from"
+        android:layout_alignStart="@+id/sp_pr_from" />
 
     <SeekBar
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/seekBar"
-        android:layout_gravity="center_horizontal"
+        android:id="@+id/sb_dist"
+        android:layout_gravity="left|bottom"
         android:gravity = "center_horizontal"
-        android:layout_below="@+id/select_distance"
-        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/tv_select_distance"
         android:thumb="@drawable/red_scrubber_controll"
-        />
+        android:layout_alignLeft="@+id/tv_select_distance"
+        android:layout_alignStart="@+id/tv_select_distance"
+        android:layout_alignRight="@+id/sp_pr_to"
+        android:layout_alignEnd="@+id/sp_pr_to"
+        android:indeterminate="false" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/select_max_distance"
+        android:id="@+id/tv_select_distance"
+        android:layout_marginTop="41dp"
+        android:layout_gravity="center_horizontal|top"
+        android:layout_below="@+id/textView2"
+        android:layout_alignLeft="@+id/sp_pr_from"
+        android:layout_alignStart="@+id/sp_pr_from" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Large Text"
-        android:id="@+id/textView3"
-        android:gravity="center_horizontal"
-        android:layout_below="@+id/seekBar"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Pasirinkite maksimalų atstumą"
-        android:id="@+id/select_distance"
+        android:text="@string/SelectOptions"
+        android:id="@+id/textView2"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="41dp"
-        android:layout_below="@+id/textView2"
-        android:layout_alignLeft="@+id/seekBar"
-        android:layout_alignStart="@+id/seekBar" />
+        android:layout_gravity="center_horizontal|top" />
+
+    <Spinner
+        android:layout_width="126dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/sp_pr_to"
+        android:layout_gravity="left|bottom"
+        android:layout_below="@+id/select_price"
+        android:layout_alignLeft="@+id/tv_pr_to"
+        android:layout_alignStart="@+id/tv_pr_to"
+        android:layout_marginTop="42dp" />
 
     <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Pasirinkite kainos ribojimą"
-        android:id="@+id/select_price"
-        android:layout_below="@+id/textView3"
-        android:layout_alignLeft="@+id/seekBar"
-        android:layout_alignStart="@+id/seekBar" />
-
-    <Spinner
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/spinner"
-        android:layout_centerVertical="true"
-        android:layout_toLeftOf="@+id/textView3"
-        android:layout_toStartOf="@+id/textView3" />
-
-    <Spinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/spinner2"
-        android:layout_centerVertical="true"
-        android:layout_toRightOf="@+id/btn_select_options_next"
-        android:layout_toEndOf="@+id/btn_select_options_next" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/selected_distance"
+        android:id="@+id/tv_prog"
+        android:gravity="center_horizontal"
+        android:layout_below="@+id/sb_dist"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/price_from"
+        android:id="@+id/tv_pr_from"
+        android:layout_above="@+id/sp_pr_from"
+        android:layout_toLeftOf="@+id/textView2"
+        android:layout_toStartOf="@+id/textView2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/price_to"
+        android:id="@+id/tv_pr_to"
+        android:layout_alignTop="@+id/tv_pr_from"
+        android:layout_alignRight="@+id/textView2"
+        android:layout_alignEnd="@+id/textView2" />
 
     <!-- <Spinner
          android:id="@+id/planets_spinner"
