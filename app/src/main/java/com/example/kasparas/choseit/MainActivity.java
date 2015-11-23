@@ -1,5 +1,6 @@
 package com.example.kasparas.choseit;
 
+import android.content.Context;
 import android.net.Uri;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -8,6 +9,8 @@ import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
@@ -17,12 +20,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements SelectOptions.OnFragmentInteractionListener,
-                                                            SelectRestaurant.OnFragmentInteractionListener {
+                                                            RestaurantList.OnFragmentInteractionListener {
 
-    private static int SPLASH_TIME_OUT = 3000;
+    private static int SPLASH_TIME_OUT = 1000;
     private static SeekBar seek_bar;
     private static TextView text_view;
 
@@ -45,9 +49,7 @@ public class MainActivity extends AppCompatActivity implements SelectOptions.OnF
             }, SPLASH_TIME_OUT);
         }
 
-
-
-    @Override
+   /* @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -90,10 +92,24 @@ public class MainActivity extends AppCompatActivity implements SelectOptions.OnF
         }
 
         return super.onOptionsItemSelected(item);
+    }*/
+
+
+    /*
+    *
+    * Events
+    *
+    * */
+    /******************************************************************************************/
+    public void button_select_options_next_click (View view) {
+        changeFragment(R.id.main, new RestaurantList();
+        showRestaurantList((getRestaurantList()));
     }
 
-    public void button_select_options_next_click (View view) {
-        changeFragment(R.id.main, new SelectRestaurant());
+    /******************************************************************************************/
+
+    public String[] getRestaurantList () {
+        return new String[] {"Kinieciai", "Ciliakas", "Montuotojas"};
     }
 
     public void changeFragment (int containerId, Fragment fragment) {
