@@ -12,4 +12,5 @@
     <string name="select_price_interv">Pasirinkite kainos ribojimą</string>
     <string name="price_from">Kaina nuo</string>
     <string name="price_to">Kaina iki</string>
+    <string name="random_button_text">Choose random restaurant</string>
 </resources>

@@ -4,11 +4,12 @@ import android.content.Context;
 import android.net.Uri;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.DialogFragment;
 import android.view.View;
+import android.os.Bundle;
+import android.os.Handler;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.view.Menu;
@@ -18,13 +19,16 @@ import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import android.app.Activity;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+//public class MainActivity extends AppCompatActivity implements SelectOptions.OnFragmentInteractionListener,
+//                                                            RestaurantList.OnFragmentInteractionListener {
+
 public class MainActivity extends AppCompatActivity implements SelectOptions.OnFragmentInteractionListener,
-                                                            RestaurantList.OnFragmentInteractionListener {
+        RestaurantList.OnFragmentInteractionListener,RandomRestaurantFragment.Communicator {
 
     private static int SPLASH_TIME_OUT = 1000;
     private static SeekBar seek_bar;
@@ -35,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements SelectOptions.OnF
     * */
     /******************************************************************************************/
     private RestaurantList restaurantListFragment;
+    private RandomRestaurantFragment randomRestaurantFragment;
     /******************************************************************************************/
 
    /* @Override
@@ -113,7 +118,19 @@ public class MainActivity extends AppCompatActivity implements SelectOptions.OnF
 
         changeFragment(R.id.main, restaurantListFragment);
     }
+    public void button_random_restaurant (View view) {
 
+        FragmentManager manager = getSupportFragmentManager();
+        RandomRestaurantFragment random = new RandomRestaurantFragment();
+        random.getShowsDialog();
+        random.show(manager, "MyDialog");
+
+    }
+
+    @Override
+    public void onDialogMessage(String message) {
+        Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
+    }
     /******************************************************************************************/
 
     /*

@@ -9,19 +9,20 @@ android:layout_height="match_parent" android:id = "@+id/selectRestaurantId" tool
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_above="@+id/button"
+        android:layout_above="@+id/btn_rand"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Choose random restaurant"
-        android:id="@+id/button"
+        android:text="@string/random_button_text"
+        android:id="@+id/btn_rand"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:onClick="button_random_restaurant"/>
 </RelativeLayout>
 
