@@ -30,24 +30,12 @@ public class MainActivity extends AppCompatActivity implements SelectOptions.OnF
     private static SeekBar seek_bar;
     private static TextView text_view;
 
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
-    }
-
-    @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.splash_screen);
-
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    setContentView(R.layout.activity_main);
-                    changeFragment(R.id.main, new SelectOptions());
-                }
-            }, SPLASH_TIME_OUT);
-        }
+    /*
+    * Fragments
+    * */
+    /******************************************************************************************/
+    private RestaurantList restaurantListFragment;
+    /******************************************************************************************/
 
    /* @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -96,17 +84,42 @@ public class MainActivity extends AppCompatActivity implements SelectOptions.OnF
 
 
     /*
-    *
     * Events
-    *
     * */
     /******************************************************************************************/
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.splash_screen);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                setContentView(R.layout.activity_main);
+                changeFragment(R.id.main, new SelectOptions());
+            }
+        }, SPLASH_TIME_OUT);
+    }
+
     public void button_select_options_next_click (View view) {
-        changeFragment(R.id.main, new RestaurantList());
+        if (restaurantListFragment == null) {
+            restaurantListFragment = new RestaurantList();
+        }
+
+        changeFragment(R.id.main, restaurantListFragment);
     }
 
     /******************************************************************************************/
 
+    /*
+    * Methods
+    * */
+    /******************************************************************************************/
     public void changeFragment (int containerId, Fragment fragment) {
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
@@ -115,4 +128,5 @@ public class MainActivity extends AppCompatActivity implements SelectOptions.OnF
         ft.addToBackStack(null);
         ft.commit();
     }
+    /******************************************************************************************/
 }
