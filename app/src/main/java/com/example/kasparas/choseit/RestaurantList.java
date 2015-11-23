@@ -2,6 +2,7 @@ package com.example.kasparas.choseit;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,8 +35,8 @@ public class RestaurantList extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+//    private String mParam1;
+ //   private String mParam2;
 
     private OnFragmentInteractionListener mListener;
 
@@ -50,8 +52,8 @@ public class RestaurantList extends Fragment {
     public static RestaurantList newInstance(String param1, String param2) {
         RestaurantList fragment = new RestaurantList();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+ //       args.putString(ARG_PARAM1, param1);
+ //       args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -60,25 +62,77 @@ public class RestaurantList extends Fragment {
         // Required empty public constructor
     }
 
-    @Override
+  /*  @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+  //          mParam1 = getArguments().getString(ARG_PARAM1);
+  //          mParam2 = getArguments().getString(ARG_PARAM2);
         }
-    }
+    }*/
 
+    ListView list;
+    CustomAdapter adapter;
+    public  RestaurantList restaurantList = null;
+    public  ArrayList<RestaurantListModel> RestaurantListItems = new ArrayList<RestaurantListModel>();
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_select_resaurant, container, false);
-        showRestaurantList(view, getRestaurantList());
+
+        /******** Take some data in Arraylist ( CustomListViewValuesArr ) ***********/
+        setListData();
+
+        Resources res = getResources();
+        list = ( ListView )view.findViewById(R.id.lv_restaurantList);  // List defined in XML ( See Below )
+
+        /**************** Create Custom Adapter *********/
+        adapter=new CustomAdapter( getActivity(), this, RestaurantListItems, res );
+        list.setAdapter(adapter);
+
         // Inflate the layout for this fragment
         return view;
     }
+
+    public void setListData()
+    {
+
+        for (int i = 0; i < 33; i++) {
+
+            final RestaurantListModel item = new RestaurantListModel();
+
+            item.setRestaurantName("Company "+i);
+            item.setImage("image"+i);
+            item.setDescription("Description " + i);
+
+            RestaurantListItems.add( item );
+        }
+
+    }
+
+
+    /*****************  This function used by adapter ****************/
+    public void onItemClick(int mPosition)
+    {
+        RestaurantListModel tempValues = RestaurantListItems.get(mPosition);
+
+        Toast.makeText(getActivity(),
+                "" + tempValues.getRestaurantName() + "\n"
+                        + "Image: "+tempValues.getImage() + "\n"
+            +"Description: "+tempValues.getDescription(),
+        Toast.LENGTH_LONG)
+        .show();
+    }
+
+
+
 
     public String[] getRestaurantList () {
         return new String[] {"Kinieciai", "Ciliakas", "Montuotojas", "Ciliakas", "Montuotojas"
