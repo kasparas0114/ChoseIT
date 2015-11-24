@@ -17,7 +17,7 @@ import java.util.ArrayList;
 /**
  * Created by Edvinas.Barickis on 11/24/2015.
  */
-public class CustomAdapter extends BaseAdapter implements View.OnClickListener {
+public class RestaurantListAdapter extends BaseAdapter implements View.OnClickListener {
 
     /*********** Declare Used Variables *********/
     private Activity activity;
@@ -28,8 +28,8 @@ public class CustomAdapter extends BaseAdapter implements View.OnClickListener {
     RestaurantListModel tempValues=null;
     int i=0;
 
-    /*************  CustomAdapter Constructor *****************/
-    public CustomAdapter(Activity a, Fragment f, ArrayList d,Resources resLocal) {
+    /*************  RestaurantListAdapter Constructor *****************/
+    public RestaurantListAdapter(Activity a, Fragment f, ArrayList d, Resources resLocal) {
 
         /********** Take passed values **********/
         activity = a;
@@ -120,7 +120,7 @@ public class CustomAdapter extends BaseAdapter implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        Log.v("CustomAdapter", "=====Row button clicked=====");
+        Log.v("RestaurantListAdapter", "=====Row button clicked=====");
     }
 
     /********* Called when Item click in ListView ************/

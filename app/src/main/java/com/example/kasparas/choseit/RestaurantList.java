@@ -1,6 +1,7 @@
 package com.example.kasparas.choseit;
 
 import android.app.Activity;
+import android.support.v4.app.FragmentTransaction;
 import android.content.Context;
 import android.content.res.Resources;
 import android.net.Uri;
@@ -11,9 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -72,7 +71,7 @@ public class RestaurantList extends Fragment {
     }*/
 
     ListView list;
-    CustomAdapter adapter;
+    RestaurantListAdapter adapter;
     public  RestaurantList restaurantList = null;
     public  ArrayList<RestaurantListModel> RestaurantListItems = new ArrayList<RestaurantListModel>();
 
@@ -94,7 +93,7 @@ public class RestaurantList extends Fragment {
         list = ( ListView )view.findViewById(R.id.lv_restaurantList);  // List defined in XML ( See Below )
 
         /**************** Create Custom Adapter *********/
-        adapter=new CustomAdapter( getActivity(), this, RestaurantListItems, res );
+        adapter=new RestaurantListAdapter( getActivity(), this, RestaurantListItems, res );
         list.setAdapter(adapter);
 
         // Inflate the layout for this fragment
@@ -104,7 +103,7 @@ public class RestaurantList extends Fragment {
     public void setListData()
     {
 
-        for (int i = 0; i < 33; i++) {
+        for (int i = 0; i < 8; i++) {
 
             final RestaurantListModel item = new RestaurantListModel();
 
@@ -117,21 +116,28 @@ public class RestaurantList extends Fragment {
 
     }
 
-
+    private MealsList mealsListFragment;
     /*****************  This function used by adapter ****************/
     public void onItemClick(int mPosition)
     {
-        RestaurantListModel tempValues = RestaurantListItems.get(mPosition);
 
-        Toast.makeText(getActivity(),
-                "" + tempValues.getRestaurantName() + "\n"
-                        + "Image: "+tempValues.getImage() + "\n"
-            +"Description: "+tempValues.getDescription(),
-        Toast.LENGTH_LONG)
-        .show();
+
+        if (mealsListFragment == null) {
+            mealsListFragment = new MealsList();
+        }
+        FragmentManager manager = getActivity().getSupportFragmentManager();
+        FragmentTransaction ft = manager.beginTransaction();
+        ft.replace (R.id.main, new MealsList()).commit();
+//        RestaurantListModel tempValues = RestaurantListItems.get(mPosition);
+//
+//        Toast.makeText(getActivity(),
+//                "" + tempValues.getRestaurantName() + "\n"
+//                        + "Image: "+tempValues.getImage() + "\n"
+//            +"Description: "+tempValues.getDescription(),
+//        Toast.LENGTH_LONG)
+//        .show();
+
     }
-
-
 
 
     public String[] getRestaurantList () {
@@ -142,7 +148,6 @@ public class RestaurantList extends Fragment {
                 , "Ciliakas", "Montuotojas", "Ciliakas", "Montuotojas", "Ciliakas", "Montuotojas"
                 , "Ciliakas", "Montuotojas", "Ciliakas", "Montuotojas", "Ciliakas", "Montuotojas"};
     }
-
     public void showRestaurantList (View view, String[] restaurantList) {
         final ListView listView = (ListView) view.findViewById(R.id.lv_restaurantList);
 

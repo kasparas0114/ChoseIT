@@ -13,4 +13,12 @@
     <string name="price_from">Kaina nuo</string>
     <string name="price_to">Kaina iki</string>
     <string name="random_button_text">Choose random restaurant</string>
+    <string name="price">Price</string>
+    <string name="mealTitle">Title</string>
+    <string name="map">Map</string>
+    <string name="meals_list">Patiekalu sarasas</string>
+    <string name="restaurant_name">Restoranas</string>
+    <string name="rate">Ivertinkinte</string>
+    <string name="phone_number">Telefonas</string>
+    <string name="adress">Adresas</string>
 </resources>

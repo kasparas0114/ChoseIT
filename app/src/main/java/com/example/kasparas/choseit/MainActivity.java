@@ -23,6 +23,7 @@ import android.app.Activity;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import android.util.Log;
 
 //public class MainActivity extends AppCompatActivity implements SelectOptions.OnFragmentInteractionListener,
 //                                                            RestaurantList.OnFragmentInteractionListener {
@@ -30,6 +31,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements SelectOptions.OnFragmentInteractionListener,
         RestaurantList.OnFragmentInteractionListener,RandomRestaurantFragment.Communicator {
 
+    String TAG = "MainActivity";
     private static int SPLASH_TIME_OUT = 1000;
     private static SeekBar seek_bar;
     private static TextView text_view;
@@ -40,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements SelectOptions.OnF
     /******************************************************************************************/
     private RestaurantList restaurantListFragment;
     private RandomRestaurantFragment randomRestaurantFragment;
+    private MealsList mealsListFragment;
     /******************************************************************************************/
 
    /* @Override
@@ -95,6 +98,7 @@ public class MainActivity extends AppCompatActivity implements SelectOptions.OnF
     @Override
     public void onFragmentInteraction(Uri uri) {
 
+        Log.w(TAG,"onFragmentInteraction");
     }
 
     @Override
@@ -109,6 +113,7 @@ public class MainActivity extends AppCompatActivity implements SelectOptions.OnF
                 changeFragment(R.id.main, new SelectOptions());
             }
         }, SPLASH_TIME_OUT);
+        Log.w(TAG,"onCreate");
     }
 
     public void button_select_options_next_click (View view) {
@@ -117,6 +122,7 @@ public class MainActivity extends AppCompatActivity implements SelectOptions.OnF
         }
 
         changeFragment(R.id.main, restaurantListFragment);
+        Log.w(TAG, "button_select_options_next_click");
     }
     public void button_random_restaurant (View view) {
 
@@ -124,12 +130,23 @@ public class MainActivity extends AppCompatActivity implements SelectOptions.OnF
         RandomRestaurantFragment random = new RandomRestaurantFragment();
         random.getShowsDialog();
         random.show(manager, "MyDialog");
+        Log.w(TAG, "button_random_restaurant");
+    }
+
+    public void item_clicked_restaurant (View view) {
+
+        if (mealsListFragment == null) {
+            mealsListFragment = new MealsList();
+        }
+        changeFragment(R.id.main, new MealsList());
+        Log.w(TAG,"item_clicked_restaurant");
 
     }
 
     @Override
     public void onDialogMessage(String message) {
         Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
+        Log.w(TAG, "onDialogMessage");
     }
     /******************************************************************************************/
 
@@ -144,6 +161,7 @@ public class MainActivity extends AppCompatActivity implements SelectOptions.OnF
         ft.replace(containerId, fragment);
         ft.addToBackStack(null);
         ft.commit();
+        Log.w(TAG, "changeFragment");
     }
     /******************************************************************************************/
 }
