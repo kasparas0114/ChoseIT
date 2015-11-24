@@ -125,9 +125,12 @@ public class RestaurantList extends Fragment {
         if (mealsListFragment == null) {
             mealsListFragment = new MealsList();
         }
-        FragmentManager manager = getActivity().getSupportFragmentManager();
-        FragmentTransaction ft = manager.beginTransaction();
-        ft.replace (R.id.main, new MealsList()).commit();
+
+        ((MainActivity)getActivity()).changeFragment(R.id.main, mealsListFragment);
+
+       // FragmentManager manager = getActivity().getSupportFragmentManager();
+      //  FragmentTransaction ft = manager.beginTransaction();
+      //  ft.replace (R.id.main, new MealsList()).commit();
 //        RestaurantListModel tempValues = RestaurantListItems.get(mPosition);
 //
 //        Toast.makeText(getActivity(),

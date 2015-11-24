@@ -29,10 +29,11 @@ import android.util.Log;
 //                                                            RestaurantList.OnFragmentInteractionListener {
 
 public class MainActivity extends AppCompatActivity implements SelectOptions.OnFragmentInteractionListener,
-        RestaurantList.OnFragmentInteractionListener,RandomRestaurantFragment.Communicator {
+        RestaurantList.OnFragmentInteractionListener,RandomRestaurantFragment.Communicator,
+        MealsList.OnFragmentInteractionListener{
 
     String TAG = "MainActivity";
-    private static int SPLASH_TIME_OUT = 1000;
+    private static int SPLASH_TIME_OUT = 100;
     private static SeekBar seek_bar;
     private static TextView text_view;
 

@@ -56,7 +56,7 @@ public class MealsList extends Fragment {
     }
 
     ListView list;
-    RestaurantListAdapter adapter;
+    MealsListAdaptor adapter;
     public MealsList mealsList = null;
     public ArrayList<MealsListModel> MealsListItems = new ArrayList<>();
 
@@ -75,7 +75,7 @@ public class MealsList extends Fragment {
         Resources res = getResources();
         list = (ListView) view.findViewById(R.id.lv_mealsList);
 
-        adapter = new RestaurantListAdapter(getActivity(), this, MealsListItems,res);
+        adapter = new MealsListAdaptor(getActivity(), this, MealsListItems,res);
         list.setAdapter(adapter);
 
 
