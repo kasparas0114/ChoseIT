@@ -30,7 +30,7 @@ import android.util.Log;
 
 public class MainActivity extends AppCompatActivity implements SelectOptions.OnFragmentInteractionListener,
         RestaurantList.OnFragmentInteractionListener,RandomRestaurantFragment.Communicator,
-        MealsList.OnFragmentInteractionListener{
+        MealsList.OnFragmentInteractionListener, MapFragment.OnFragmentInteractionListener{
 
     String TAG = "MainActivity";
     private static int SPLASH_TIME_OUT = 100;

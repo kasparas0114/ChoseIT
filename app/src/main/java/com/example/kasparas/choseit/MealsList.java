@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -65,6 +66,8 @@ public class MealsList extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+
+    private MapFragment mapFragment;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -77,6 +80,15 @@ public class MealsList extends Fragment {
 
         adapter = new MealsListAdaptor(getActivity(), this, MealsListItems,res);
         list.setAdapter(adapter);
+
+        Button mapButton = (Button) view.findViewById(R.id.btn_map);
+        mapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                ((MainActivity)getActivity()).changeFragment(R.id.main, mapFragment);
+            }
+        });
 
 
         return view;
