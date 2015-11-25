@@ -12,6 +12,9 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+
 import java.util.ArrayList;
 
 /**
@@ -85,8 +88,12 @@ public class MealsList extends Fragment {
         mapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                ((MainActivity)getActivity()).changeFragment(R.id.main, mapFragment);
+                getActivity().setContentView(R.layout.activity_maps);
+                SupportMapFragment mapFragment = (SupportMapFragment) ((MainActivity)getActivity()).getSupportFragmentManager()
+                        .findFragmentById(R.id.map);
+              //  getActivity().setContentView(R.layout.activity_main);
+              //  ((MainActivity) getActivity()).showMapFragment(R.id.main, mapFragment);
+                mapFragment.getMapAsync((OnMapReadyCallback) getActivity());
             }
         });
 

@@ -10,11 +10,12 @@ import android.support.v4.app.DialogFragment;
 import android.view.View;
 import android.os.Bundle;
 import android.os.Handler;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.ArrayAdapter;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -30,12 +31,14 @@ import android.util.Log;
 
 public class MainActivity extends AppCompatActivity implements SelectOptions.OnFragmentInteractionListener,
         RestaurantList.OnFragmentInteractionListener,RandomRestaurantFragment.Communicator,
-        MealsList.OnFragmentInteractionListener, MapFragment.OnFragmentInteractionListener{
+        MealsList.OnFragmentInteractionListener, MapFragment.OnFragmentInteractionListener,
+        OnMapReadyCallback{
 
     String TAG = "MainActivity";
-    private static int SPLASH_TIME_OUT = 100;
+    private static int SPLASH_TIME_OUT = 1000;
     private static SeekBar seek_bar;
     private static TextView text_view;
+    private GoogleMap mMap;
 
     /*
     * Fragments
@@ -45,7 +48,15 @@ public class MainActivity extends AppCompatActivity implements SelectOptions.OnF
     private RandomRestaurantFragment randomRestaurantFragment;
     private MealsList mealsListFragment;
     /******************************************************************************************/
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
 
+        // Add a marker in Sydney and move the camera
+        LatLng sydney = new LatLng(-34, 151);
+        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+    }
    /* @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -164,5 +175,15 @@ public class MainActivity extends AppCompatActivity implements SelectOptions.OnF
         ft.commit();
         Log.w(TAG, "changeFragment");
     }
+
+    /*public void showMapFragment (int containerId, Fragment fragment) {
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+
+        ft.add(containerId, fragment);
+        ft.addToBackStack(null);
+        ft.commit();
+        Log.w(TAG, "changeFragment");
+    }*/
     /******************************************************************************************/
 }
