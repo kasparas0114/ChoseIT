@@ -12,6 +12,7 @@
     android:layout_height = "fill_parent"
     android:enabled = "true"
     android:clickable = "true"
+    android:class = "com.google.android.gms.maps.SupportMapFragment"
     />
 
 </FrameLayout>

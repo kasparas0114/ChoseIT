@@ -8,6 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.UiSettings;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -17,7 +24,7 @@ import android.view.ViewGroup;
  * Use the {@link MapFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MapFragment extends Fragment {
+public class MapFragment extends SupportMapFragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -26,7 +33,7 @@ public class MapFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    private LatLng mPosFija;
     private OnFragmentInteractionListener mListener;
 
     /**
@@ -65,8 +72,16 @@ public class MapFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_map, container, false);
+        View v = super.onCreateView(inflater, container, savedInstanceState);
+       // Fragment fragment = getParentFragment();
+      //  UiSettings settings = getMap().getUiSettings();
+      //  settings.setAllGesturesEnabled(false);
+     //   settings.setMyLocationButtonEnabled(false);
+
+       // getMap().moveCamera(CameraUpdateFactory.newLatLngZoom(mPosFija, 16));
+       // getMap().addMarker(new MarkerOptions().position(mPosFija);
+
+        return v;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
