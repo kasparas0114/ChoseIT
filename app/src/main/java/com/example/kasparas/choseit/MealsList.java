@@ -36,6 +36,7 @@ public class MealsList extends Fragment {
 
     private OnFragmentInteractionListener mListener;
     public Restaurant restaurant;
+
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -95,6 +96,7 @@ public class MealsList extends Fragment {
             @Override
             public void onClick(View v) {
                 MapFragment mf = new MapFragment();
+                mf.restaurant = restaurant;
                 ((MainActivity) getActivity()).changeFragment(R.id.main, mf);
             }
         });

@@ -15,6 +15,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.UiSettings;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -41,6 +42,7 @@ public class MapFragment extends SupportMapFragment implements LocationListener,
     private OnFragmentInteractionListener mListener;
 
     private MainActivity activity;
+    public Restaurant restaurant;
 
     /**
      * Use this factory method to create a new instance of
@@ -85,17 +87,19 @@ public class MapFragment extends SupportMapFragment implements LocationListener,
 
         LatLng location = activity.getLocation();
 
-        getMap().moveCamera(CameraUpdateFactory.newLatLngZoom(location, 15));
+
         getMap().addMarker(new MarkerOptions().position(location));
         addRestaurantMarkersToMap();
     }
 
     public void addRestaurantMarkersToMap() {
 
-        List<Restaurant> restaurants = activity.getRestaurantList();
+        getMap().addMarker(new MarkerOptions().position(activity.getRestaurantLocation(restaurant))).setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+        getMap().moveCamera(CameraUpdateFactory.newLatLngZoom(activity.getRestaurantLocation(restaurant), 15));
+      /*  List<Restaurant> restaurants = activity.getRestaurantList();
         for (Restaurant restaurant:restaurants) {
             getMap().addMarker(new MarkerOptions().position(activity.getRestaurantLocation(restaurant)));
-        }
+        }*/
     }
 
     @Override
