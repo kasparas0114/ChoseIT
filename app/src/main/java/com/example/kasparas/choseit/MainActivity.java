@@ -20,10 +20,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.util.Log;
+
 import java.io.IOException;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.InputStream;
 
 public class MainActivity extends AppCompatActivity implements SelectOptions.OnFragmentInteractionListener,
@@ -111,12 +114,23 @@ public class MainActivity extends AppCompatActivity implements SelectOptions.OnF
         return new LatLng(bestLocation.getLatitude(), bestLocation.getLongitude());
     }
 
+    public Location getLoc(){
+        Location loc = new Location("Current");
+        LatLng currentLatLng = getLocation();
+
+        loc.setLatitude(currentLatLng.latitude);
+        loc.setLongitude(currentLatLng.longitude);
+
+        return loc;
+    }
+
     /*
     * Events
     * */
 
     /******************************************************************************************/
     @Override
+
     public void onFragmentInteraction(Uri uri) {
 
         Log.w(TAG, "onFragmentInteraction");
@@ -220,31 +234,31 @@ public class MainActivity extends AppCompatActivity implements SelectOptions.OnF
     }
 
     public List<Restaurant> getRestaurantList(int distance) {
-        List <Restaurant> allRestaurants = getRestaurantList();
-        List <Restaurant> resultRestaurants = new ArrayList<>();
+        List<Restaurant> allRestaurants = getRestaurantList();
+        List<Restaurant> resultRestaurants = new ArrayList<>();
         LatLng currentLoc = getLocation();
 
         for (int i = 0; i < allRestaurants.size(); i++) {
             Restaurant restaurant = allRestaurants.get(i);
-            Location restaurantLocation = new Location("RestaurantLocation");
+           /* Location restaurantLocation = new Location("RestaurantLocation");
             restaurantLocation.setLatitude(restaurant.getLattitude());
-            restaurantLocation.setLongitude(restaurant.getLongtitude());
+            restaurantLocation.setLongitude(restaurant.getLongtitude());*/
             Location currentLocation = new Location("Current");
             currentLocation.setLatitude(currentLoc.latitude);
             currentLocation.setLongitude(currentLoc.longitude);
 
-            if (restaurantLocation.distanceTo(currentLocation) <= distance) {
+            if (currentLocation.distanceTo(restaurant.getLocation()) <= distance) {
                 resultRestaurants.add(restaurant);
             }
         }
         return resultRestaurants;
     }
 
-    public List <Meal> getRestaurantMeals (Restaurant restaurant, double minPrice, double maxPrice) {
-        List <Meal> allMeals = restaurant.getMealList();
-        List <Meal> resultMeals = new ArrayList<>();
+    public List<Meal> getRestaurantMeals(Restaurant restaurant, double minPrice, double maxPrice) {
+        List<Meal> allMeals = restaurant.getMealList();
+        List<Meal> resultMeals = new ArrayList<>();
 
-        for (int i=0; i<allMeals.size(); i++) {
+        for (int i = 0; i < allMeals.size(); i++) {
             double price = allMeals.get(i).getPrice();
             if (price >= minPrice && price <= maxPrice) {
                 resultMeals.add(allMeals.get(i));
@@ -308,9 +322,10 @@ public class MainActivity extends AppCompatActivity implements SelectOptions.OnF
         return result;
     }
 
-    public LatLng getRestaurantLocation (Restaurant restaurant) {
+    public LatLng getRestaurantLocation(Restaurant restaurant) {
         return new LatLng(restaurant.getLattitude(), restaurant.getLongtitude());
     }
+
 
     /******************************************************************************************/
 }

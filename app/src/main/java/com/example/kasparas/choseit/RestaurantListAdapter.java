@@ -12,6 +12,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 /**
@@ -63,6 +65,7 @@ public class RestaurantListAdapter extends BaseAdapter implements View.OnClickLi
 
         public TextView tv_name;
         public TextView tv_description;
+        public TextView tv_distance;
 
     }
 
@@ -82,6 +85,8 @@ public class RestaurantListAdapter extends BaseAdapter implements View.OnClickLi
             holder = new ViewHolder();
             holder.tv_name = (TextView) vi.findViewById(R.id.tv_restaurantListItem_title);
             holder.tv_description=(TextView)vi.findViewById(R.id.tv_restaurantListItem_description);
+            holder.tv_distance=(TextView)vi.findViewById(R.id.tv_restaurant_distance);
+
             //holder.image=(ImageView)vi.findViewById(R.id.iv_restaurantListItem_image);
 
             /************  Set holder with LayoutInflater ************/
@@ -105,6 +110,9 @@ public class RestaurantListAdapter extends BaseAdapter implements View.OnClickLi
 
             holder.tv_name.setText( tempValues.getRestName() );
             holder.tv_description.setText( tempValues.getAddress() );
+            Float distance = ((MainActivity) activity).getLoc().distanceTo(tempValues.getLocation())/1000;
+            String distanceString = String.format("%.1f", distance);
+            holder.tv_distance.setText(distanceString + " km");
             /*holder.image.setImageResource(
                     res.getIdentifier(
                             "com.example.kasparas.choseit:drawable/"+tempValues.getImage()

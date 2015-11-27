@@ -25,15 +25,5 @@ android:layout_height="match_parent" android:id = "@+id/selectRestaurantId" tool
         android:layout_alignParentStart="true"
         android:onClick="button_random_restaurant"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Spinnerio rezultatas"
-        android:id="@+id/spinner_rez"
-        android:layout_marginTop="115dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
 </RelativeLayout>
 

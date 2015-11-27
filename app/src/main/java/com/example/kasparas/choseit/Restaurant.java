@@ -1,5 +1,7 @@
 package com.example.kasparas.choseit;
 
+import android.location.Location;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -76,5 +78,16 @@ public class Restaurant {
 
     public void setLattitude(double lattitude) {
         this.lattitude = lattitude;
+    }
+
+    public float getDistanceTo (Restaurant restaurant) {
+        return getLocation().distanceTo(restaurant.getLocation());
+    }
+
+    public Location getLocation () {
+        Location loc = new Location("");
+        loc.setLatitude(lattitude);
+        loc.setLongitude(longtitude);
+        return loc;
     }
 }

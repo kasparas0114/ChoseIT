@@ -1,6 +1,7 @@
 package com.example.kasparas.choseit;
 
 import android.app.Activity;
+import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,6 +15,8 @@ import android.widget.TextView;
 import android.widget.SeekBar;
 import android.graphics.Color;
 import android.widget.Spinner;
+import android.widget.Toast;
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -128,20 +131,45 @@ public class SelectOptions extends Fragment {
 
     }
 
+    private MainActivity activity;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_select_options, container, false);
         initSeekbar(view);
         initPriceSpinners(view);
-
+        activity = (MainActivity)getActivity();
         Button mapButton = (Button) view.findViewById(R.id.btn_select_options_next);
         mapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mListener.saveOptionsValues(Integer.toString(seek_bar.getProgress()),spinnerFrom.getSelectedItem().toString(),spinnerTo.getSelectedItem().toString());
-                RestaurantList mf = new RestaurantList();
-                ((MainActivity) getActivity()).changeFragment(R.id.main, mf);
+                try {
+                    ((MainActivity)getActivity()).getLocation();
+                    Double valueFrom = Double.valueOf(spinnerFrom.getSelectedItem().toString());
+                    Double valueTo = Double.valueOf(spinnerTo.getSelectedItem().toString());
+
+                    if (valueFrom > valueTo)
+                        throw new Exception ("Incorrect choice");
+
+                    mListener.saveOptionsValues(Integer.toString(seek_bar.getProgress()),spinnerFrom.getSelectedItem().toString(),spinnerTo.getSelectedItem().toString());
+                    RestaurantList mf = new RestaurantList();
+                    ((MainActivity) getActivity()).changeFragment(R.id.main, mf);
+                } catch (NullPointerException ex) {
+                    Context context = getActivity();
+                    CharSequence text = "Please enable GPS";
+                    int duration = Toast.LENGTH_SHORT;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                } catch (Exception ex) {
+                    Context context = getActivity();
+                    CharSequence text = ex.getMessage();
+                    int duration = Toast.LENGTH_SHORT;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                }
+
             }
         });
 
