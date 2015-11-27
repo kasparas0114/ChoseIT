@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Restaurants xmlns:android="http://schemas.android.com/apk/res/android">
+    <Restaurant name = "Čili Kinija" adress ="Rinktinės g. 13">
+     <Latitude>54.696580</Latitude>
+     <Longtitude>25.288889</Longtitude>
+     <Meals>
+             <Meal>
+                 <Name> Gong Bao</Name>
+                 <Price> 3 </Price>
+                 <Ingredients> Chicken, Orange</Ingredients>
+             </Meal>
+             <Meal>
+                 <Name> Gua Bao</Name>
+                 <Price> 6 </Price>
+                 <Ingredients> Chicken, Tomato</Ingredients>
+             </Meal>
+             <Meal>
+                 <Name> FishAndChips </Name>
+                 <Price> 5 </Price>
+                 <Ingredients> Fish, Potato</Ingredients>
+             </Meal>
+             <Meal>
+                 <Name> Vyšnaitės </Name>
+                 <Price> 4 </Price>
+                 <Ingredients> Chicken, Tomato, CherrySauce </Ingredients>
+             </Meal>
+     </Meals>
+    </Restaurant>
+    <Restaurant name = "Čili Pica" adress ="Ozo g. 25">
+        <Latitude>54.709877</Latitude>
+        <Longtitude>25.261440</Longtitude>
+        <Meals>
+                <Meal>
+                    <Name> Kaprio</Name>
+                    <Price> 3.50 </Price>
+                    <Ingredients> Pickles, Salami</Ingredients>
+                </Meal>
+                <Meal>
+                    <Name> Metų laikai</Name>
+                    <Price> 4.20 </Price>
+                    <Ingredients> Cheese, beef</Ingredients>
+                </Meal>
+                <Meal>
+                    <Name> Havajų </Name>
+                    <Price> 4.70 </Price>
+                    <Ingredients> Cheese, salamni, pineapple</Ingredients>
+                </Meal>
+                <Meal>
+                    <Name> Studentų </Name>
+                    <Price> 2.49 </Price>
+                    <Ingredients> Cheese, salami</Ingredients>
+                </Meal>
+        </Meals>
+    </Restaurant>
+    <Restaurant name = "Charlie" adress ="Justiniškių g. 91">
+        <Latitude>54.717484</Latitude>
+        <Longtitude>25.222463</Longtitude>
+        <Meals>
+                <Meal>
+                    <Name> Šefo paprastoji</Name>
+                    <Price> 2.13 </Price>
+                    <Ingredients> Pickles, Salami</Ingredients>
+                </Meal>
+                <Meal>
+                    <Name> Margarita </Name>
+                    <Price> 1.79 </Price>
+                    <Ingredients> Pickles, Salami</Ingredients>
+                </Meal>
+                <Meal>
+                    <Name> Šefo perlektoji </Name>
+                    <Price> 2.59 </Price>
+                    <Ingredients> Pickles, Salami</Ingredients>
+                </Meal>
+                <Meal>
+                    <Name> Storapadė </Name>
+                    <Price> 3.13 </Price>
+                    <Ingredients> Pickles, Salami</Ingredients>
+                </Meal>
+        </Meals>
+    </Restaurant>
+    <Restaurant name = "HBH" adress ="Raudondvaris">
+        <Latitude>54.826889</Latitude>
+        <Longtitude>25.276659</Longtitude>
+        <Meals>
+                <Meal>
+                    <Name> Charčio </Name>
+                    <Price> 3.49 </Price>
+                    <Ingredients> Beef, potatoes</Ingredients>
+                </Meal>
+                <Meal>
+                    <Name> Cepelinai </Name>
+                    <Price> 2.89 </Price>
+                    <Ingredients> Pork, potatoes</Ingredients>
+                </Meal>
+                <Meal>
+                    <Name> Aviena vyno padaže</Name>
+                    <Price> 5.40 </Price>
+                    <Ingredients> lamb, vine </Ingredients>
+                </Meal>
+                <Meal>
+                    <Name> Kiaulienos šašlykas </Name>
+                    <Price> 7.12 </Price>
+                    <Ingredients> Pork, tomato</Ingredients>
+                </Meal>
+        </Meals>
+    </Restaurant>
+</Restaurants>

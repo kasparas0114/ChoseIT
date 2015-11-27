@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.SeekBar;
 import android.graphics.Color;
@@ -27,6 +28,7 @@ import java.util.ArrayList;
 public class SelectOptions extends Fragment {
 
 
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -34,7 +36,8 @@ public class SelectOptions extends Fragment {
 
     private static SeekBar seek_bar;
     private static TextView text_view;
-    Spinner spinnerFrom;
+    private static Spinner spinnerFrom;
+    private static Spinner spinnerTo;
     ArrayAdapter<CharSequence> adapter;
 
     // TODO: Rename and change types of parameters
@@ -80,8 +83,8 @@ public class SelectOptions extends Fragment {
 
         ArrayAdapter<Double> spinnerAdapter = new ArrayAdapter<Double>(this.getActivity(),android.R.layout.simple_spinner_item,spinnerArr);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        Spinner spinnerFrom = (Spinner) view.findViewById(R.id.sp_pr_from);
-        Spinner spinnerTo = (Spinner) view.findViewById(R.id.sp_pr_to);
+        spinnerFrom = (Spinner) view.findViewById(R.id.sp_pr_from);
+        spinnerTo = (Spinner) view.findViewById(R.id.sp_pr_to);
         spinnerFrom.setAdapter(spinnerAdapter);
         spinnerTo.setAdapter(spinnerAdapter);
     }
@@ -131,6 +134,17 @@ public class SelectOptions extends Fragment {
         View view = inflater.inflate(R.layout.fragment_select_options, container, false);
         initSeekbar(view);
         initPriceSpinners(view);
+
+        Button mapButton = (Button) view.findViewById(R.id.btn_select_options_next);
+        mapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.saveOptionsValues(Integer.toString(seek_bar.getProgress()),spinnerFrom.getSelectedItem().toString(),spinnerTo.getSelectedItem().toString());
+                RestaurantList mf = new RestaurantList();
+                ((MainActivity) getActivity()).changeFragment(R.id.main, mf);
+            }
+        });
+
         return view;
     }
 
@@ -162,7 +176,7 @@ public class SelectOptions extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
+        void saveOptionsValues (String seekBarValue, String spinnerFromValue, String spinnerToValue);
         public void onFragmentInteraction(Uri uri);
     }
 
