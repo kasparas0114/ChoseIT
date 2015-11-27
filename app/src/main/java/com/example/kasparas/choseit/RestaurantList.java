@@ -1,13 +1,11 @@
 package com.example.kasparas.choseit;
 
 import android.app.Activity;
-import android.support.v4.app.FragmentTransaction;
 import android.content.Context;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,31 +26,12 @@ import java.util.List;
  * create an instance of this fragment.
  */
 public class RestaurantList extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-//    private String mParam1;
- //   private String mParam2;
 
     private OnFragmentInteractionListener mListener;
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment RestaurantList.
-     */
-    // TODO: Rename and change types and number of parameters
     public static RestaurantList newInstance(String param1, String param2) {
         RestaurantList fragment = new RestaurantList();
         Bundle args = new Bundle();
- //       args.putString(ARG_PARAM1, param1);
- //       args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -61,19 +40,10 @@ public class RestaurantList extends Fragment {
         // Required empty public constructor
     }
 
-  /*  @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-  //          mParam1 = getArguments().getString(ARG_PARAM1);
-  //          mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }*/
-
     ListView list;
     RestaurantListAdapter adapter;
-    public  RestaurantList restaurantList = null;
-    public  ArrayList<RestaurantListModel> RestaurantListItems = new ArrayList<RestaurantListModel>();
+    public RestaurantList restaurantList = null;
+    public ArrayList<RestaurantListModel> RestaurantListItems = new ArrayList<RestaurantListModel>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -90,68 +60,55 @@ public class RestaurantList extends Fragment {
         setListData();
 
         Resources res = getResources();
-        list = ( ListView )view.findViewById(R.id.lv_restaurantList);  // List defined in XML ( See Below )
+        list = (ListView) view.findViewById(R.id.lv_restaurantList);  // List defined in XML ( See Below )
 
         /**************** Create Custom Adapter *********/
-        adapter=new RestaurantListAdapter( getActivity(), this, RestaurantListItems, res );
+        adapter = new RestaurantListAdapter(getActivity(), this, RestaurantListItems, res);
         list.setAdapter(adapter);
 
         // Inflate the layout for this fragment
         return view;
     }
 
-    public void setListData()
-    {
+    public void setListData() {
 
         for (int i = 0; i < 8; i++) {
 
             final RestaurantListModel item = new RestaurantListModel();
 
-            item.setRestaurantName("Company "+i);
-            item.setImage("image"+i);
+            item.setRestaurantName("Company " + i);
+            item.setImage("image" + i);
             item.setDescription("Description " + i);
 
-            RestaurantListItems.add( item );
+            RestaurantListItems.add(item);
         }
 
     }
 
     private MealsList mealsListFragment;
-    /*****************  This function used by adapter ****************/
-    public void onItemClick(int mPosition)
-    {
 
-
+    /*****************
+     * This function used by adapter
+     ****************/
+    public void onItemClick(int mPosition) {
         if (mealsListFragment == null) {
             mealsListFragment = new MealsList();
         }
 
-        ((MainActivity)getActivity()).changeFragment(R.id.main, mealsListFragment);
-
-       // FragmentManager manager = getActivity().getSupportFragmentManager();
-      //  FragmentTransaction ft = manager.beginTransaction();
-      //  ft.replace (R.id.main, new MealsList()).commit();
-//        RestaurantListModel tempValues = RestaurantListItems.get(mPosition);
-//
-//        Toast.makeText(getActivity(),
-//                "" + tempValues.getRestaurantName() + "\n"
-//                        + "Image: "+tempValues.getImage() + "\n"
-//            +"Description: "+tempValues.getDescription(),
-//        Toast.LENGTH_LONG)
-//        .show();
-
+        ((MainActivity) getActivity()).changeFragment(R.id.main, mealsListFragment);
     }
 
 
-    public String[] getRestaurantList () {
-        return new String[] {"Kinieciai", "Ciliakas", "Montuotojas", "Ciliakas", "Montuotojas"
+    public String[] getRestaurantList() {
+        return new String[]{"Kinieciai", "Ciliakas", "Montuotojas", "Ciliakas", "Montuotojas"
                 , "Ciliakas", "Montuotojas", "Ciliakas", "Montuotojas", "Ciliakas", "Montuotojas"
                 , "Ciliakas", "Montuotojas", "Ciliakas", "Montuotojas", "Ciliakas", "Montuotojas"
                 , "Ciliakas", "Montuotojas", "Ciliakas", "Montuotojas", "Ciliakas", "Montuotojas"
                 , "Ciliakas", "Montuotojas", "Ciliakas", "Montuotojas", "Ciliakas", "Montuotojas"
                 , "Ciliakas", "Montuotojas", "Ciliakas", "Montuotojas", "Ciliakas", "Montuotojas"};
     }
-    public void showRestaurantList (View view, String[] restaurantList) {
+
+    public void showRestaurantList(View view, String[] restaurantList) {
         final ListView listView = (ListView) view.findViewById(R.id.lv_restaurantList);
 
         final ArrayList<String> list = new ArrayList<String>();
@@ -161,11 +118,11 @@ public class RestaurantList extends Fragment {
         final OSArrayAdapter adapter = new OSArrayAdapter(this.getActivity(),
                 R.layout.restaurant_list_item, R.id.tv_restaurantListItem_title, list);
         listView.setAdapter(adapter);
-
     }
 
     public class OSArrayAdapter extends ArrayAdapter<String> {
         HashMap<String, Integer> mIdMap = new HashMap<String, Integer>();
+
         public OSArrayAdapter(Context context, int rowId, int textViewResourceId,
                               List<String> objects) {
             super(context, rowId, textViewResourceId, objects);
