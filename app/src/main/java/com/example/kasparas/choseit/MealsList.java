@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -33,7 +34,7 @@ public class MealsList extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
-
+    public Restaurant restaurant;
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -59,7 +60,7 @@ public class MealsList extends Fragment {
     ListView list;
     MealsListAdaptor adapter;
     public MealsList mealsList = null;
-    public ArrayList<MealsListModel> MealsListItems = new ArrayList<>();
+    public ArrayList<Meal> MealsListItems = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -75,11 +76,14 @@ public class MealsList extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_select_meal, container, false);
 
-        setListData();
+        //setListData();
         Resources res = getResources();
         list = (ListView) view.findViewById(R.id.lv_mealsList);
+        ((TextView)view.findViewById(R.id.tv_restaurant_name)).setText(restaurant.getRestName());
+        ((TextView)view.findViewById(R.id.tv_adress)).setText(restaurant.getAddress());
+        ((TextView)view.findViewById(R.id.tv_phone_nr)).setText(restaurant.getPhoneNumber());
 
-        adapter = new MealsListAdaptor(getActivity(), this, MealsListItems, res);
+        adapter = new MealsListAdaptor(getActivity(), this, (ArrayList)restaurant.getMealList(), res);
         list.setAdapter(adapter);
 
         Button mapButton = (Button) view.findViewById(R.id.btn_map);
@@ -95,11 +99,11 @@ public class MealsList extends Fragment {
         return view;
     }
 
-    public void setListData() {
+    /*public void setListData() {
 
         for (int i = 0; i < 8; i++) {
 
-            final MealsListModel item = new MealsListModel();
+            final Meal item = new Meal();
 
             item.setMealName("Maistas" + i);
             item.setPrice(i + "€");
@@ -107,10 +111,10 @@ public class MealsList extends Fragment {
             MealsListItems.add(item);
         }
 
-    }
+    }*/
 
     public void onItemClick(int mPosition) {
-        MealsListModel tempValues = MealsListItems.get(mPosition);
+        Meal tempValues = MealsListItems.get(mPosition);
 
         Toast.makeText(getActivity(),
                 "" + tempValues.getMealName() + "\n"

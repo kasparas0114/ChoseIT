@@ -25,7 +25,7 @@ public class RestaurantListAdapter extends BaseAdapter implements View.OnClickLi
     private Fragment fragment;
     private static LayoutInflater inflater=null;
     public Resources res;
-    RestaurantListModel tempValues=null;
+    Restaurant tempValues=null;
     int i=0;
 
     /*************  RestaurantListAdapter Constructor *****************/
@@ -63,7 +63,6 @@ public class RestaurantListAdapter extends BaseAdapter implements View.OnClickLi
 
         public TextView tv_name;
         public TextView tv_description;
-        public ImageView image;
 
     }
 
@@ -83,7 +82,7 @@ public class RestaurantListAdapter extends BaseAdapter implements View.OnClickLi
             holder = new ViewHolder();
             holder.tv_name = (TextView) vi.findViewById(R.id.tv_restaurantListItem_title);
             holder.tv_description=(TextView)vi.findViewById(R.id.tv_restaurantListItem_description);
-            holder.image=(ImageView)vi.findViewById(R.id.iv_restaurantListItem_image);
+            //holder.image=(ImageView)vi.findViewById(R.id.iv_restaurantListItem_image);
 
             /************  Set holder with LayoutInflater ************/
             vi.setTag( holder );
@@ -100,12 +99,12 @@ public class RestaurantListAdapter extends BaseAdapter implements View.OnClickLi
         {
             /***** Get each Model object from Arraylist ********/
             tempValues=null;
-            tempValues = ( RestaurantListModel ) data.get( position );
+            tempValues = ( Restaurant ) data.get( position );
 
             /************  Set Model values in Holder elements ***********/
 
-            holder.tv_name.setText( tempValues.getRestaurantName() );
-            holder.tv_description.setText( tempValues.getDescription() );
+            holder.tv_name.setText( tempValues.getRestName() );
+            holder.tv_description.setText( tempValues.getAddress() );
             /*holder.image.setImageResource(
                     res.getIdentifier(
                             "com.example.kasparas.choseit:drawable/"+tempValues.getImage()

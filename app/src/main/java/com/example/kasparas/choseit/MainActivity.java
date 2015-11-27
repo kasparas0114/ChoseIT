@@ -210,6 +210,15 @@ public class MainActivity extends AppCompatActivity implements SelectOptions.OnF
         return json;
     }
 
+    private List<Restaurant> restaurantList;
+
+    public List<Restaurant> getRestaurantList() {
+        if (restaurantList == null) {
+            restaurantList = readRestaurantListData();
+        }
+        return restaurantList;
+    }
+
     public List<Restaurant> readRestaurantListData() {
         List<Restaurant> restaurantList = new ArrayList<Restaurant>();
 
@@ -218,10 +227,11 @@ public class MainActivity extends AppCompatActivity implements SelectOptions.OnF
             for (int i = 0; i < restaurants.length(); i++) {
                 JSONObject obj = (JSONObject) restaurants.get(i);
                 Restaurant restaurant = new Restaurant();
-                restaurant.setAdress(obj.getString("address"));
+                restaurant.setAddress(obj.getString("address"));
                 restaurant.setRestName(obj.getString("name"));
                 restaurant.setLattitude(obj.getDouble("Latitude"));
                 restaurant.setLongtitude(obj.getDouble("Longtitude"));
+                restaurant.setPhoneNumber(obj.getString("phoneNumber"));
                 restaurant.setMealList(getMealListFromRestaurantJSONObject(obj));
                 restaurantList.add(restaurant);
             }

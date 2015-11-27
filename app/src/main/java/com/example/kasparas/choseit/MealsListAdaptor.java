@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Edvinas.Barickis on 11/24/2015.
@@ -25,7 +26,7 @@ public class MealsListAdaptor extends BaseAdapter implements View.OnClickListene
     private Fragment fragment;
     private static LayoutInflater inflater=null;
     public Resources res;
-    MealsListModel tempValues=null;
+    private Meal tempValues=null;
     int i=0;
 
     /*************  RestaurantListAdapter Constructor *****************/
@@ -98,12 +99,12 @@ public class MealsListAdaptor extends BaseAdapter implements View.OnClickListene
         {
             /***** Get each Model object from Arraylist ********/
             tempValues=null;
-            tempValues = ( MealsListModel ) data.get( position );
+            tempValues = ( Meal ) data.get( position );
 
             /************  Set Model values in Holder elements ***********/
 
             holder.tv_title.setText( tempValues.getMealName() );
-            holder.tv_price.setText( tempValues.getPrice() );
+            holder.tv_price.setText( String.valueOf(tempValues.getPrice()) );
             /*holder.image.setImageResource(
                     res.getIdentifier(
                             "com.example.kasparas.choseit:drawable/"+tempValues.getImage()

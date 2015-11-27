@@ -92,7 +92,7 @@ public class MapFragment extends SupportMapFragment implements LocationListener,
 
     public void addRestaurantMarkersToMap() {
 
-        List<Restaurant> restaurants = activity.readRestaurantListData();
+        List<Restaurant> restaurants = activity.getRestaurantList();
         for (Restaurant restaurant:restaurants) {
             getMap().addMarker(new MarkerOptions().position(activity.getRestaurantLocation(restaurant)));
         }

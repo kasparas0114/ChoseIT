@@ -9,23 +9,34 @@ import java.util.List;
 public class Restaurant {
 
     private String restName;
-    private String adress;
+    private String address;
     private double lattitude;
     private double longtitude;
     private List<Meal> mealList;
+    private String phoneNumber;
 
-    public String getAdress() {
-        return adress;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String adress) {
+        this.address = adress;
     }
 
     public Meal getMeal(int id) {
         return mealList.get(id);
     }
 
+    public List<Meal> getMealList () {
+        return mealList;
+    }
     public void setMealList(List<Meal> mealList) {
         if (mealList == null) {
             this.mealList = new ArrayList<Meal>();

@@ -40,14 +40,17 @@ public class RestaurantList extends Fragment {
         // Required empty public constructor
     }
 
+    MainActivity activity;
+
     ListView list;
     RestaurantListAdapter adapter;
     public RestaurantList restaurantList = null;
-    public ArrayList<RestaurantListModel> RestaurantListItems = new ArrayList<RestaurantListModel>();
+   // public ArrayList<RestaurantListModel> RestaurantListItems = new ArrayList<RestaurantListModel>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        activity = (MainActivity)getActivity();
     }
 
     @Override
@@ -57,32 +60,16 @@ public class RestaurantList extends Fragment {
         View view = inflater.inflate(R.layout.fragment_select_resaurant, container, false);
 
         /******** Take some data in Arraylist ( CustomListViewValuesArr ) ***********/
-        setListData();
 
         Resources res = getResources();
         list = (ListView) view.findViewById(R.id.lv_restaurantList);  // List defined in XML ( See Below )
 
         /**************** Create Custom Adapter *********/
-        adapter = new RestaurantListAdapter(getActivity(), this, RestaurantListItems, res);
+        adapter = new RestaurantListAdapter(activity, this, (ArrayList)activity.getRestaurantList(), res);
         list.setAdapter(adapter);
 
         // Inflate the layout for this fragment
         return view;
-    }
-
-    public void setListData() {
-
-        for (int i = 0; i < 8; i++) {
-
-            final RestaurantListModel item = new RestaurantListModel();
-
-            item.setRestaurantName("Company " + i);
-            item.setImage("image" + i);
-            item.setDescription("Description " + i);
-
-            RestaurantListItems.add(item);
-        }
-
     }
 
     private MealsList mealsListFragment;
@@ -95,20 +82,11 @@ public class RestaurantList extends Fragment {
             mealsListFragment = new MealsList();
         }
 
+        mealsListFragment.restaurant = activity.getRestaurantList().get(mPosition);
         ((MainActivity) getActivity()).changeFragment(R.id.main, mealsListFragment);
     }
 
-
-    public String[] getRestaurantList() {
-        return new String[]{"Kinieciai", "Ciliakas", "Montuotojas", "Ciliakas", "Montuotojas"
-                , "Ciliakas", "Montuotojas", "Ciliakas", "Montuotojas", "Ciliakas", "Montuotojas"
-                , "Ciliakas", "Montuotojas", "Ciliakas", "Montuotojas", "Ciliakas", "Montuotojas"
-                , "Ciliakas", "Montuotojas", "Ciliakas", "Montuotojas", "Ciliakas", "Montuotojas"
-                , "Ciliakas", "Montuotojas", "Ciliakas", "Montuotojas", "Ciliakas", "Montuotojas"
-                , "Ciliakas", "Montuotojas", "Ciliakas", "Montuotojas", "Ciliakas", "Montuotojas"};
-    }
-
-    public void showRestaurantList(View view, String[] restaurantList) {
+  /*  public void showRestaurantList(View view, String[] restaurantList) {
         final ListView listView = (ListView) view.findViewById(R.id.lv_restaurantList);
 
         final ArrayList<String> list = new ArrayList<String>();
@@ -118,9 +96,9 @@ public class RestaurantList extends Fragment {
         final OSArrayAdapter adapter = new OSArrayAdapter(this.getActivity(),
                 R.layout.restaurant_list_item, R.id.tv_restaurantListItem_title, list);
         listView.setAdapter(adapter);
-    }
+    }*/
 
-    public class OSArrayAdapter extends ArrayAdapter<String> {
+  /*  public class OSArrayAdapter extends ArrayAdapter<String> {
         HashMap<String, Integer> mIdMap = new HashMap<String, Integer>();
 
         public OSArrayAdapter(Context context, int rowId, int textViewResourceId,
@@ -142,7 +120,7 @@ public class RestaurantList extends Fragment {
             return true;
         }
     }
-
+*/
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
