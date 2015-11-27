@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -57,6 +58,7 @@ public class MealsList extends Fragment {
         // Required empty public constructor
     }
 
+    private MainActivity activity;
     ListView list;
     MealsListAdaptor adapter;
     public MealsList mealsList = null;
@@ -65,6 +67,7 @@ public class MealsList extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        activity = (MainActivity)getActivity();
     }
 
 
@@ -83,7 +86,8 @@ public class MealsList extends Fragment {
         ((TextView)view.findViewById(R.id.tv_adress)).setText(restaurant.getAddress());
         ((TextView)view.findViewById(R.id.tv_phone_nr)).setText(restaurant.getPhoneNumber());
 
-        adapter = new MealsListAdaptor(getActivity(), this, (ArrayList)restaurant.getMealList(), res);
+        List<Meal> mealList = activity.getRestaurantMeals(restaurant, Double.valueOf(activity.GetSpinnerPriceFrom()),Double.valueOf( activity.GetSpinnerPriceTo()));
+        adapter = new MealsListAdaptor(activity, this, (ArrayList)mealList, res);
         list.setAdapter(adapter);
 
         Button mapButton = (Button) view.findViewById(R.id.btn_map);

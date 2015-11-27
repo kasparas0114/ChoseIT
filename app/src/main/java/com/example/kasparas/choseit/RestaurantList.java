@@ -1,7 +1,6 @@
 package com.example.kasparas.choseit;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
@@ -9,12 +8,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 
 /**
@@ -65,7 +61,7 @@ public class RestaurantList extends Fragment {
         list = (ListView) view.findViewById(R.id.lv_restaurantList);  // List defined in XML ( See Below )
 
         /**************** Create Custom Adapter *********/
-        adapter = new RestaurantListAdapter(activity, this, (ArrayList)activity.getRestaurantList(), res);
+        adapter = new RestaurantListAdapter(activity, this, (ArrayList)activity.getRestaurantList(Integer.valueOf(activity.GetSeekBarBrogress())*1000), res);
         list.setAdapter(adapter);
 
         // Inflate the layout for this fragment

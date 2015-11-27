@@ -219,6 +219,41 @@ public class MainActivity extends AppCompatActivity implements SelectOptions.OnF
         return restaurantList;
     }
 
+    public List<Restaurant> getRestaurantList(int distance) {
+        List <Restaurant> allRestaurants = getRestaurantList();
+        List <Restaurant> resultRestaurants = new ArrayList<>();
+        LatLng currentLoc = getLocation();
+
+        for (int i = 0; i < allRestaurants.size(); i++) {
+            Restaurant restaurant = allRestaurants.get(i);
+            Location restaurantLocation = new Location("RestaurantLocation");
+            restaurantLocation.setLatitude(restaurant.getLattitude());
+            restaurantLocation.setLongitude(restaurant.getLongtitude());
+            Location currentLocation = new Location("Current");
+            currentLocation.setLatitude(currentLoc.latitude);
+            currentLocation.setLongitude(currentLoc.longitude);
+
+            if (restaurantLocation.distanceTo(currentLocation) <= distance) {
+                resultRestaurants.add(restaurant);
+            }
+        }
+        return resultRestaurants;
+    }
+
+    public List <Meal> getRestaurantMeals (Restaurant restaurant, double minPrice, double maxPrice) {
+        List <Meal> allMeals = restaurant.getMealList();
+        List <Meal> resultMeals = new ArrayList<>();
+
+        for (int i=0; i<allMeals.size(); i++) {
+            double price = allMeals.get(i).getPrice();
+            if (price >= minPrice && price <= maxPrice) {
+                resultMeals.add(allMeals.get(i));
+            }
+        }
+
+        return resultMeals;
+    }
+
     public List<Restaurant> readRestaurantListData() {
         List<Restaurant> restaurantList = new ArrayList<Restaurant>();
 
