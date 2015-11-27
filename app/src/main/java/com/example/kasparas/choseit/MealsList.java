@@ -12,9 +12,6 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-
 import java.util.ArrayList;
 
 /**
@@ -71,6 +68,7 @@ public class MealsList extends Fragment {
 
 
     private MapFragment mapFragment;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -81,7 +79,7 @@ public class MealsList extends Fragment {
         Resources res = getResources();
         list = (ListView) view.findViewById(R.id.lv_mealsList);
 
-        adapter = new MealsListAdaptor(getActivity(), this, MealsListItems,res);
+        adapter = new MealsListAdaptor(getActivity(), this, MealsListItems, res);
         list.setAdapter(adapter);
 
         Button mapButton = (Button) view.findViewById(R.id.btn_map);
@@ -89,31 +87,29 @@ public class MealsList extends Fragment {
             @Override
             public void onClick(View v) {
                 MapFragment mf = new MapFragment();
-                ((MainActivity)getActivity()).changeFragment(R.id.main, mf);
-        }
+                ((MainActivity) getActivity()).changeFragment(R.id.main, mf);
+            }
         });
 
 
         return view;
     }
 
-    public void setListData()
-    {
+    public void setListData() {
 
         for (int i = 0; i < 8; i++) {
 
             final MealsListModel item = new MealsListModel();
 
-            item.setMealName("Maistas"+i);
+            item.setMealName("Maistas" + i);
             item.setPrice(i + "€");
 
-            MealsListItems.add( item );
+            MealsListItems.add(item);
         }
 
     }
 
-    public void onItemClick (int mPosition)
-    {
+    public void onItemClick(int mPosition) {
         MealsListModel tempValues = MealsListItems.get(mPosition);
 
         Toast.makeText(getActivity(),

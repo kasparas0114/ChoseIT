@@ -1,6 +1,8 @@
 package com.example.kasparas.choseit;
 
 import android.app.Activity;
+import android.location.Location;
+import android.location.LocationListener;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,12 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.UiSettings;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,7 +26,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
  * Use the {@link MapFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MapFragment extends SupportMapFragment {
+public class MapFragment extends SupportMapFragment implements LocationListener, OnMapReadyCallback {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -55,6 +57,7 @@ public class MapFragment extends SupportMapFragment {
     }
 
     public MapFragment() {
+        super();
         // Required empty public constructor
     }
 
@@ -69,20 +72,27 @@ public class MapFragment extends SupportMapFragment {
         }
     }
 
+    private void initMap() {
+        UiSettings settings = getMap().getUiSettings();
+        settings.setAllGesturesEnabled(false);
+        settings.setMyLocationButtonEnabled(true);
+        settings.setAllGesturesEnabled(true);
+        settings.setMyLocationButtonEnabled(true);
+
+        LatLng location = ((MainActivity) getActivity()).getLocation();
+
+        getMap().moveCamera(CameraUpdateFactory.newLatLngZoom(location, 15));
+        getMap().addMarker(new MarkerOptions().position(location));
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = super.onCreateView(inflater, container, savedInstanceState);
-       // Fragment fragment = getParentFragment();
-      //  UiSettings settings = getMap().getUiSettings();
-      //  settings.setAllGesturesEnabled(false);
-     //   settings.setMyLocationButtonEnabled(false);
-
-       // getMap().moveCamera(CameraUpdateFactory.newLatLngZoom(mPosFija, 16));
-       // getMap().addMarker(new MarkerOptions().position(mPosFija);
-
+        initMap();
         return v;
     }
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -108,6 +118,27 @@ public class MapFragment extends SupportMapFragment {
         mListener = null;
     }
 
+    @Override
+    public void onLocationChanged(Location location) {
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+
+    }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -122,5 +153,4 @@ public class MapFragment extends SupportMapFragment {
         // TODO: Update argument type and name
         public void onFragmentInteraction(Uri uri);
     }
-
 }
