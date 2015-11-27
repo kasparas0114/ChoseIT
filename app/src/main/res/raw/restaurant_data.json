@@ -2,7 +2,7 @@
   "Restaurants": [
     {
       "name": "Čili Kinija",
-      "adress": "Rinktinės g. 13",
+      "address": "Rinktinės g. 13",
       "Latitude": "54.696580",
       "Longtitude": "25.288889",
       "Meals": [
@@ -30,7 +30,7 @@
     },
     {
       "name": "Čili Pica",
-      "adress": "Ozo g. 25",
+      "address": "Ozo g. 25",
       "Latitude": "54.709877",
       "Longtitude": "25.261440",
       "Meals": [
@@ -58,7 +58,7 @@
     },
     {
       "name": "Charlie",
-      "adress": "Justiniškių g. 91",
+      "address": "Justiniškių g. 91",
       "Latitude": "54.717484",
       "Longtitude": "25.222463",
       "Meals": [
@@ -86,7 +86,7 @@
     },
     {
       "name": "HBH",
-      "adress": "Raudondvaris",
+      "address": "Raudondvaris",
       "Latitude": "54.826889",
       "Longtitude": "25.276659",
       "Meals": [

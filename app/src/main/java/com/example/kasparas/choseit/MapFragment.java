@@ -18,6 +18,8 @@ import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.List;
+
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
@@ -37,6 +39,8 @@ public class MapFragment extends SupportMapFragment implements LocationListener,
     private String mParam2;
     private LatLng mPosFija;
     private OnFragmentInteractionListener mListener;
+
+    private MainActivity activity;
 
     /**
      * Use this factory method to create a new instance of
@@ -65,7 +69,7 @@ public class MapFragment extends SupportMapFragment implements LocationListener,
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        activity = (MainActivity)getActivity();
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -79,10 +83,19 @@ public class MapFragment extends SupportMapFragment implements LocationListener,
         settings.setAllGesturesEnabled(true);
         settings.setMyLocationButtonEnabled(true);
 
-        LatLng location = ((MainActivity) getActivity()).getLocation();
+        LatLng location = activity.getLocation();
 
         getMap().moveCamera(CameraUpdateFactory.newLatLngZoom(location, 15));
         getMap().addMarker(new MarkerOptions().position(location));
+        addRestaurantMarkersToMap();
+    }
+
+    public void addRestaurantMarkersToMap() {
+
+        List<Restaurant> restaurants = activity.readRestaurantListData();
+        for (Restaurant restaurant:restaurants) {
+            getMap().addMarker(new MarkerOptions().position(activity.getRestaurantLocation(restaurant)));
+        }
     }
 
     @Override

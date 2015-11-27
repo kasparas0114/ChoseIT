@@ -12,7 +12,7 @@ public class Restaurant {
     private String adress;
     private double lattitude;
     private double longtitude;
-    private ArrayList<Meal> mealList;
+    private List<Meal> mealList;
 
     public String getAdress() {
         return adress;
@@ -26,12 +26,21 @@ public class Restaurant {
         return mealList.get(id);
     }
 
-    public void setMealList(Meal meal) {
+    public void setMealList(List<Meal> mealList) {
+        if (mealList == null) {
+            this.mealList = new ArrayList<Meal>();
+        } else {
+            this.mealList = mealList;
+        }
+
+
+    }
+
+    public void addMeal (Meal meal) {
         if (mealList == null) {
             this.mealList = new ArrayList<Meal>();
         }
         this.mealList.add(meal);
-
     }
 
     public String getRestName() {

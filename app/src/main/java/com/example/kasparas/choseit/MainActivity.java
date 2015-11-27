@@ -11,18 +11,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.os.Bundle;
 import android.os.Handler;
+
 import com.google.android.gms.maps.model.LatLng;
+
 import android.widget.Toast;
-import android.app.Activity;
+
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+
 import android.util.Log;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-import org.xmlpull.v1.XmlPullParserFactory;
 import java.io.IOException;
-import java.io.FileInputStream;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import java.io.InputStream;
 
 public class MainActivity extends AppCompatActivity implements SelectOptions.OnFragmentInteractionListener,
         RestaurantList.OnFragmentInteractionListener, RandomRestaurantFragment.Communicator,
@@ -34,29 +36,27 @@ public class MainActivity extends AppCompatActivity implements SelectOptions.OnF
     private String spinnerPriceFrom;
     private String spinnerPriceTo;
 
-    public void SetSeekBarProgress (String seekBarProgress)
-    {
+    public void SetSeekBarProgress(String seekBarProgress) {
         this.seekBarProgress = seekBarProgress;
     }
-    public String GetSeekBarBrogress ()
-    {
+
+    public String GetSeekBarBrogress() {
         return this.seekBarProgress;
     }
 
-    public void SetSpinnerPriceFrom (String spinnerPriceFrom)
-    {
+    public void SetSpinnerPriceFrom(String spinnerPriceFrom) {
         this.spinnerPriceFrom = spinnerPriceFrom;
     }
-    public String GetSpinnerPriceFrom ()
-    {
+
+    public String GetSpinnerPriceFrom() {
         return this.spinnerPriceFrom;
     }
-    public void SetSpinnerPriceTo (String spinnerPriceTo)
-    {
+
+    public void SetSpinnerPriceTo(String spinnerPriceTo) {
         this.spinnerPriceTo = spinnerPriceTo;
     }
-    public String GetSpinnerPriceTo ()
-    {
+
+    public String GetSpinnerPriceTo() {
         return this.spinnerPriceTo;
     }
 
@@ -74,8 +74,6 @@ public class MainActivity extends AppCompatActivity implements SelectOptions.OnF
 
     /******************************************************************************************/
 
-        
-
 
     //this gets called by SelectOptionsFragment to get values
     @Override
@@ -85,9 +83,10 @@ public class MainActivity extends AppCompatActivity implements SelectOptions.OnF
         SetSpinnerPriceFrom(spinnerFromValue);
         SetSpinnerPriceTo(spinnerToValue);
 
-      //  RestaurantList restaurantFragment = (RestaurantList) getSupportFragmentManager().findFragmentById(R.id.selectRestaurantId);
-      //  restaurantFragment.setValues(seekBarValue,spinnerFromValue,spinnerToValue);
+        //  RestaurantList restaurantFragment = (RestaurantList) getSupportFragmentManager().findFragmentById(R.id.selectRestaurantId);
+        //  restaurantFragment.setValues(seekBarValue,spinnerFromValue,spinnerToValue);
     }
+
     /* @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -128,16 +127,6 @@ public class MainActivity extends AppCompatActivity implements SelectOptions.OnF
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_screen);
 
-
-//        AssetManager assetManager = getAssets();
-//        FileInputStream inputStream = null;
-//        try{
-//            inputStream = assetManager.open("restaurant_data.xml");
-//        }
-//        catch (IOException e) {
-//            Toast.makeText(this,e.getMessage().toString(),Toast.LENGTH_LONG).show();
-//        }
-
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -157,7 +146,7 @@ public class MainActivity extends AppCompatActivity implements SelectOptions.OnF
         Log.w(TAG, "button_select_options_next_click");
     }
 
-//    public void button_select_options_next_click (View view) {
+    //    public void button_select_options_next_click (View view) {
 //        if (restaurantListFragment == null) {
 //            restaurantListFragment = new RestaurantList();
 //        }
@@ -165,8 +154,8 @@ public class MainActivity extends AppCompatActivity implements SelectOptions.OnF
 //        changeFragment(R.id.main, restaurantListFragment);
 //        Log.w(TAG, "button_select_options_next_click");
 //    }
-    public void button_random_restaurant (View view) {
-        
+    public void button_random_restaurant(View view) {
+
         FragmentManager manager = getSupportFragmentManager();
         RandomRestaurantFragment random = new RandomRestaurantFragment();
         random.getShowsDialog();
@@ -204,5 +193,79 @@ public class MainActivity extends AppCompatActivity implements SelectOptions.OnF
         ft.commit();
         Log.w(TAG, "changeFragment");
     }
+
+    public String readJSONStringFromFile() {
+        String json = null;
+        try {
+            InputStream is = getResources().openRawResource(R.raw.restaurant_data);
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            json = new String(buffer, "UTF-8");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+        return json;
+    }
+
+    public List<Restaurant> readRestaurantListData() {
+        List<Restaurant> restaurantList = new ArrayList<Restaurant>();
+
+        JSONArray restaurants = readRestaurantDataFromFile();
+        try {
+            for (int i = 0; i < restaurants.length(); i++) {
+                JSONObject obj = (JSONObject) restaurants.get(i);
+                Restaurant restaurant = new Restaurant();
+                restaurant.setAdress(obj.getString("address"));
+                restaurant.setRestName(obj.getString("name"));
+                restaurant.setLattitude(obj.getDouble("Latitude"));
+                restaurant.setLongtitude(obj.getDouble("Longtitude"));
+                restaurant.setMealList(getMealListFromRestaurantJSONObject(obj));
+                restaurantList.add(restaurant);
+            }
+        } catch (Exception ex) {
+
+        }
+        return restaurantList;
+    }
+
+    public List<Meal> getMealListFromRestaurantJSONObject(JSONObject restaurant) {
+        List<Meal> mealList = new ArrayList<Meal>();
+
+        try {
+            JSONArray mealJSONArray = restaurant.getJSONArray("Meals");
+            for (int i = 0; i < mealJSONArray.length(); i++) {
+                JSONObject obj = (JSONObject) mealJSONArray.get(i);
+
+                Meal meal = new Meal();
+                meal.setIngredients(obj.getString("Ingredients"));
+                meal.setMealName(obj.getString("Name"));
+                meal.setPrice(obj.getDouble("Price"));
+                mealList.add(meal);
+            }
+        } catch (Exception ex) {
+        }
+
+        return mealList;
+    }
+
+    public JSONArray readRestaurantDataFromFile() {
+        JSONArray result = null;
+        try {
+            JSONObject obj = new JSONObject(readJSONStringFromFile());
+            result = obj.getJSONArray("Restaurants");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    public LatLng getRestaurantLocation (Restaurant restaurant) {
+        return new LatLng(restaurant.getLattitude(), restaurant.getLongtitude());
+    }
+
     /******************************************************************************************/
 }
