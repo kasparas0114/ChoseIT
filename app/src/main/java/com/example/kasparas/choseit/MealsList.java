@@ -120,13 +120,13 @@ public class MealsList extends Fragment {
     }*/
 
     public void onItemClick(int mPosition) {
-        Meal tempValues = MealsListItems.get(mPosition);
+        /*Meal tempValues = MealsListItems.get(mPosition);
 
         Toast.makeText(getActivity(),
                 "" + tempValues.getMealName() + "\n"
                         + "Price: " + tempValues.getPrice(),
                 Toast.LENGTH_LONG)
-                .show();
+                .show();*/
     }
 
 
