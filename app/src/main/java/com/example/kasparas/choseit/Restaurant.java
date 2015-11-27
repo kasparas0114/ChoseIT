@@ -10,8 +10,8 @@ public class Restaurant {
 
     private String restName;
     private String adress;
-    private float lattitude;
-    private float longtitude;
+    private double lattitude;
+    private double longtitude;
     private ArrayList<Meal> mealList;
 
     public String getAdress() {
@@ -42,19 +42,19 @@ public class Restaurant {
         this.restName = restName;
     }
 
-    public float getLongtitude() {
+    public double getLongtitude() {
         return longtitude;
     }
 
-    public void setLongtitude(float longtitude) {
+    public void setLongtitude(double longtitude) {
         this.longtitude = longtitude;
     }
 
-    public float getLattitude() {
+    public double getLattitude() {
         return lattitude;
     }
 
-    public void setLattitude(float lattitude) {
+    public void setLattitude(double lattitude) {
         this.lattitude = lattitude;
     }
 }
